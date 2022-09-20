@@ -30,3 +30,35 @@ ForEach ($thing in $things) {
     Write-Output "It highlights it using the GitHub style"
 }
 ```
+![d094457dba93724d931a192ec26334106a953a55ee59ea7f063499695f220cb2](https://user-images.githubusercontent.com/76531825/191363143-41bb096b-27b5-4f06-b930-595f655ef98e.png)
+
+```python
+# https://stackoverflow.com/questions/3463930/how-to-round-the-minute-of-a-datetime-object
+def dt_time_mod(time, delta, epoch=None):
+    if epoch is None:
+        epoch = datetime(1970, 1, 1, tzinfo=time.tzinfo)
+    return (time - epoch) % delta
+
+
+def dt_time_round(time, delta, epoch=None):
+    mod = dt_time_mod(time, delta, epoch)
+    if mod < delta / 2:
+        return time - mod
+    return time + (delta - mod)
+
+
+def dt_time_floor(time, delta, epoch=None):
+    mod = dt_time_mod(time, delta, epoch)
+    return time - mod
+
+
+def dt_time_ceil(time, delta, epoch=None):
+    mod = dt_time_mod(time, delta, epoch)
+    if mod:
+        return time + (delta - mod)
+    return time
+
+
+def dt_timedelta_to_time(dt_td: timedelta):
+    return (datetime.min + dt_td).time()
+```
